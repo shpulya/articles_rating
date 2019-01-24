@@ -1,0 +1,14 @@
+<h2>Top first 30 articles</h2>
+
+<ol class="articles">
+  <li *ngFor="let article of topArticlesTitles">
+      <span class="article">{{article}}</span>
+  </li>
+</ol>
+
+<h2>Top 10 commentators name</h2>
+<ol class="articles">
+  <li *ngFor = "let commentator of sortableCommentatorsByCommentsCount | keyvalue">
+    <span>{{commentator.key}}</span> <span class="badge"> {{commentator.value}} </span>
+  </li>
+</ol>
