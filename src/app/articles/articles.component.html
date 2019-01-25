@@ -9,7 +9,7 @@
   <h2>Top 10 commentators name</h2>
   <ul class="articles">
     <li *ngFor = "let commentator of sortableCommentatorsByCommentsCount ">
-      <span class="badge"> {{commentator.value}} </span> <span class="commentator">{{commentator.key}}</span>
+      <span class="badge"> {{commentator.count}} </span> <span class="commentator">{{commentator.commentator}}</span>
     </li>
   </ul>
 </div>

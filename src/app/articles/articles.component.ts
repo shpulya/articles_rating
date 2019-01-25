@@ -12,6 +12,7 @@ export class ArticlesComponent implements OnInit {
   error: any;
   commentatorCounts = {};
   sortableCommentatorsByCommentsCount: any;
+
   constructor(private articlesService: ArticlesService) {
   }
 
@@ -27,14 +28,7 @@ export class ArticlesComponent implements OnInit {
                   if (!!article.kids) {
                     article.kids.forEach(commentId => {
                       this.articlesService.getArticle(commentId).subscribe(comment => {
-                        if (!!comment && !!comment.by) {
-                          this.commentatorNamesList.push(comment.by);
-                          for (let i = 0, len = this.commentatorNamesList.length; i < len; i++) {
-                            let currentName = this.commentatorNamesList[i];
-                            this.commentatorCounts[currentName] = (this.commentatorCounts[currentName] || 0) + 1;
-                          }
-                          this.sortableCommentatorsByCommentsCount = this.topCommentators(this.commentatorCounts, 10);
-                        }
+                        this.populateCommentatorNameAndComment(comment);
                       });
                     });
                   }
@@ -46,14 +40,24 @@ export class ArticlesComponent implements OnInit {
       );
   }
 
+  private populateCommentatorNameAndComment(comment) {
+    if (!!comment && !!comment.by) {
+      this.commentatorNamesList.push(comment.by);
+      this.commentatorNamesList.forEach((currentName) => {
+        this.commentatorCounts[currentName] = (this.commentatorCounts[currentName] || 0) + 1;
+      });
+      this.sortableCommentatorsByCommentsCount = this.topCommentators(this.commentatorCounts, 10);
+    }
+  }
+
   topCommentators(obj, n) {
     return Object.entries(obj)
       .sort((a, b) => a[1] < b[1] ? 1 : -1)
       .slice(0, n)
       .map(el => {
         return {
-          'key': el[0],
-          'value': el[1]
+          'commentator': el[0],
+          'count': el[1]
         };
       });
   }
