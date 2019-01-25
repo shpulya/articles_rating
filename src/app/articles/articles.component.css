@@ -1,8 +1,13 @@
+
+ul {
+  list-style-type: none;
+}
 .badge {
   display: inline-block;
   font-size: small;
   color: white;
   padding: 0.8em 0.7em 0 0.7em;
+  margin-bottom: 0.5em;
   background-color: #607D8B;
   background-color: rgb(0,120,215);
   line-height: 1em;
