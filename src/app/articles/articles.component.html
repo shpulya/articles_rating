@@ -7,9 +7,9 @@
   </ol>
 
   <h2>Top 10 commentators name</h2>
-  <ol class="articles">
-    <li *ngFor = "let commentator of sortableCommentatorsByCommentsCount">
-      <span class="badge"> {{commentator}} </span>
+  <ul class="articles">
+    <li *ngFor = "let commentator of sortableCommentatorsByCommentsCount ">
+      <span class="badge"> {{commentator[1]}} </span> <span class="commentator">{{commentator[0]}}</span>
     </li>
-  </ol>
+  </ul>
 </div>
