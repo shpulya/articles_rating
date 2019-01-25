@@ -47,13 +47,9 @@ export class ArticlesComponent implements OnInit {
   }
 
   topCommentators<Object>(obj, n) {
-    return Object.keys(obj)
-      .sort((a, b) => +a - +b)
-      .slice(0, n)
-      .reduce(function (result, current) {
-        result[current] = obj[current];
-        return result;
-      }, {});
+    return Object.entries(obj)
+      .sort((a, b) => a[1] < b[1] ? 1 : -1)
+      .slice(0, n);
   }
 
   ngOnInit() {
