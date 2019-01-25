@@ -11,7 +11,7 @@ export class ArticlesComponent implements OnInit {
   commentatorNamesList = [];
   error: any;
   commentatorCounts = {};
-  sortableCommentatorsByCommentsCount = {};
+  sortableCommentatorsByCommentsCount: any;
   constructor(private articlesService: ArticlesService) {
   }
 
@@ -34,7 +34,6 @@ export class ArticlesComponent implements OnInit {
                             this.commentatorCounts[currentName] = (this.commentatorCounts[currentName] || 0) + 1;
                           }
                           this.sortableCommentatorsByCommentsCount = this.topCommentators(this.commentatorCounts, 10);
-                          console.log( this.sortableCommentatorsByCommentsCount);
                         }
                       });
                     });
@@ -50,7 +49,13 @@ export class ArticlesComponent implements OnInit {
   topCommentators(obj, n) {
     return Object.entries(obj)
       .sort((a, b) => a[1] < b[1] ? 1 : -1)
-      .slice(0, n);
+      .slice(0, n)
+      .map(el => {
+        return {
+          'key': el[0],
+          'value': el[1]
+        };
+      });
   }
 
   ngOnInit() {
